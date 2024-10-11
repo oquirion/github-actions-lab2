@@ -1,17 +1,21 @@
 name: Installing Python
-
-on: [push]
-
+'on':
+  - push
 jobs:
   build:
+    runs-on: '${{ matrix.os }}'
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-12, windows-latest ]
-        py-version: [3.7, 3.8, 3.9]
-    runs-on: ${{ matrix.os }}
+        os:
+          - ubuntu-latest
+          - macos-12
+          - windows-latest
+        py-version:
+          - 3.7
+          - 3.8
+          - 3.9
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version:  ${{ matrix.py-version }}
-        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '${{ matrix.py-version }}'
